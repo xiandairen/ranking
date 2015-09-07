@@ -384,10 +384,11 @@ $(function(){
 //埋点方法
 //var statPoint = function(uid,ver,channel,more){
 var statPoint = function(uid,mid,ver,phone,os,ov,rs,net,channel,more){
-
     var navi = window.navigator;
+    var ua = navigator.appVersion;
     var mid = getUrlString('mid');
-    var os = getUrlString('pf') || navi.appCodeName;
+    var os = getUrlString('pf');
+    var id = getUrlString("id");
     var version = navi.appVersion.substr(ua.indexOf('version/')+8,4);
     var ov = version=='cint' ? '' : version;
     var phone = getUrlString('ph');
@@ -396,12 +397,16 @@ var statPoint = function(uid,mid,ver,phone,os,ov,rs,net,channel,more){
     var rs = getUrlString('res') ||  window.screen.width+'*'+window.screen.height;
     var net = getUrlString('net');
     var uid = getUrlString('uid');
-    var channel = getUrlString('channel');
+    var ch = getUrlString('channel');
     var cid = getUrlString('cid');
     var ver = getUrlString('ver');
+    var rc = getUrlString("rc");
+    var rcc = getUrlString("rcc");
+    var myDate = Math.round(new Date() / 1000);//时间戳，需要传给统计后台
+
     var url = 'http://d.happyjuzi.com:8011/in';
 
-    var data = 'head?pro=juzi&uid='+uid+'&mid='+mid+'&ver='+ver+'&mac='+mac+'&cid='+cid+'&ph='+phone+'&os='+os+'&ov='+ov+'&rs='+rs+'&net='+net+'&ch='+channel+'#'+more;
+    var data = 'head?pro=juzi&uid='+id+'&mid='+mid+'&ver='+ver+'&mac='+mac+'&cid='+cid+'&ph='+phone+'&os='+os+'&ov='+ov+'&rs='+rs+'&net='+net+'&ch='+ch+'#'+"&rc="+rc+"&rcc="+rcc+"&myDate="+myDate+more;
     $.ajax({
         type: 'POST',
         url: url,
