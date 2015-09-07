@@ -388,6 +388,7 @@ var statPoint = function(uid,mid,ver,phone,os,ov,rs,net,channel,more){
     var ua = navigator.appVersion;
     var mid = getUrlString('mid');
     var ph = getUrlString('pf');
+    var os = getUrlString('pf');
     var id = getUrlString("id");
     var version = navi.appVersion.substr(ua.indexOf('version/')+8,4);
     var ov = version=='cint' ? '' : version;
@@ -406,12 +407,9 @@ var statPoint = function(uid,mid,ver,phone,os,ov,rs,net,channel,more){
     var os = getUrlString("os");
    //- var ov = getUrlString("ov");
     var uuid = getUrlString("uuid");
-
     var myDate = Math.round(new Date() / 1000);//时间戳，需要传给统计后台
-
     var url = 'http://d.happyjuzi.com:8011/in';
-
-    var data = 'head?pro=juzi&uid='+id+'&mid='+mid+'&ver='+ver+'&mac='+mac+'&cid='+cid+"&pro="+pro+'&ph='+ph+"&uuid="+uuid+"&ov="+ov+"&os="+os+'&ov='+ov+'&rs='+rs+'&net='+net+'&ch='+ch+'#'+"&rc="+rc+"&rcc="+rcc+"&myDate="+myDate+more;
+    var data = 'head?pro=juzi&uid='+id+'&mid='+mid+'&ver='+ver+'&mac='+mac+'&cid='+cid+"&pro="+pro+'&ph='+ph+"&uuid="+uuid+"&ov="+ov+"&os="+os+'&rs='+rs+'&net='+net+'&ch='+ch+"&rc="+rc+"&rcc="+rcc+"&myDate="+myDate+more;
     $.ajax({
         type: 'POST',
         url: url,
