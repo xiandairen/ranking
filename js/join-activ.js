@@ -1,62 +1,6 @@
 (function($){
-    //ä¯ÀÀÍ³¼Æ
-    var getArtId =$(".artWrap").attr("id"); // ÕâÊÇ´«¸øºóÌ¨ÎÄÕÂµÄid
-    var more_v = 'dp?mod=v&id='+getArtId+'&src=1&from='+getUrlString('d_source')+'fuid='+getUrlString('fromuid');
-    statPoint(more_v,null);
-
-    //Î¢ĞÅĞèÒªµÄÊı¾İ
-    share_title = "»î¶¯"+ $("title").text();
-    lc = window.location.href;
-    share_imgUrl = $(".base-figure").eq(0).find("img").attr("src");
-    share_desc =$("title").text();
-
-    //·ÖÏí³öÈ¥Ö®ºó
-    wx.config({
-        debug: false,
-        appId: 'wxd92ccb751aa7075b',
-        timestamp: timestampData,
-        nonceStr: nonceStrData,
-        signature: signatureData,
-        jsApiList: ['checkJsApi',
-            'onMenuShareTimeline',
-            'onMenuShareAppMessage',
-            'onMenuShareQQ',
-            'onMenuShareWeibo']
-    });
-
-    wx.ready(function(){
-        wx.onMenuShareTimeline({
-            title: share_title,
-            desc: share_title,
-            link: lc,
-            imgUrl: share_imgUrl
-        });
-        //·ÖÏí¸øÎ¢ĞÅºÃÓÑ
-        wx.onMenuShareAppMessage({
-            title: share_title,
-            desc: share_desc,
-            link: lc,
-            imgUrl: share_imgUrl
-        });
-        //·ÖÏí¸øQQ
-        wx.onMenuShareQQ({
-            title: share_title,
-            desc: share_desc,
-            link: lc,
-            imgUrl: share_imgUrl
-        });
-        //·ÖÏí¸øQQÎ¢²©
-        wx.onMenuShareWeibo({
-            title: share_title,
-            desc: share_desc,
-            link: lc,
-            imgUrl: share_imgUrl
-        });
-    })
-
-
-
-    //Âñµã·½·¨
+    var ua = navigator.userAgent.toLowerCase();
+    //åŸ‹ç‚¹æ–¹æ³•
     var statPoint = function(more,callback){
         var navi = window.navigator;
         var ua = navigator.appVersion;
@@ -77,7 +21,7 @@
         var rcc = getUrlString("rcc");
         var pro = getUrlString("pro");
         var uuid = getUrlString("uuid");
-        var myDate = Math.round(new Date() / 1000);//Ê±¼ä´Á£¬ĞèÒª´«¸øÍ³¼ÆºóÌ¨
+        var myDate = Math.round(new Date() / 1000);//æ—¶é—´æˆ³ï¼Œéœ€è¦ä¼ ç»™ç»Ÿè®¡åå°
         var url = 'http://d.happyjuzi.com:8011/in';
         var data = 'head?pro=juzi&uid='+id+'&mid='+mid+'&ver='+ver+'&mac='+mac+'&cid='+cid+"&pro="+pro+'&ph='+ph+"&uuid="+uuid+"&ov="+ov+"&os="+os+'&rs='+rs+'&net='+net+'&ch='+ch+"&rc="+rc+"&rcc="+rcc+"&tm="+myDate+more;
         $.ajax({
@@ -89,7 +33,7 @@
             jsonpCallback:"success_jsonpCallback",
             success: function(){
                 return true;
-                //·µ»Ø½á¹û´¦Àí£¨½á¹û±ÈÀıÖØÖÃ£¬ÀàËÆ½ø¶ÈÌõ£©
+                //è¿”å›ç»“æœå¤„ç†ï¼ˆç»“æœæ¯”ä¾‹é‡ç½®ï¼Œç±»ä¼¼è¿›åº¦æ¡ï¼‰
             },
             error: function(xhr, type){
                 console.log('Ajax error!');
@@ -104,7 +48,7 @@
             }
         })
     }
-    //»ñÈ¡URL²ÎÊı
+    //è·å–URLå‚æ•°
     function getUrlString(name) {
         var reg = new RegExp("(^|&)"+name+"=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
@@ -119,7 +63,7 @@
         }
         return '';
     }
-    //ÅĞ¶ÏÊÖ»ú»úĞÍ
+    //åˆ¤æ–­æ‰‹æœºæœºå‹
     function phoneName(){
         var reg = /\(.*?\)/;
         var system = navigator.userAgent.toLowerCase().replace(/\s/g, '').match(reg)[0];
@@ -155,7 +99,7 @@
         // alert(os)
         return os;
     }
-    //ÅĞ¶ÏÊÖ»úÏµÍ³
+    //åˆ¤æ–­æ‰‹æœºç³»ç»Ÿ
     function sys() {
         var nav = navigator.userAgent.toLowerCase().replace(/\s/g, "");
         var sys = ['iphone', 'android', "ipad", "windowsphone", "meego"];
@@ -182,7 +126,74 @@
     }
 
 
-    //ÅĞ¶ÏÓĞÎŞ°²×°app
+    //æµè§ˆç»Ÿè®¡
+    var getArtId =$(".artWrap").attr("id"); // è¿™æ˜¯ä¼ ç»™åå°æ–‡ç« çš„id
+    var more_v = 'dp?mod=v&id='+getArtId+'&src=1&from='+getUrlString('d_source')+'fuid='+getUrlString('fromuid');
+    statPoint(more_v,null);
+
+    //å¾®ä¿¡éœ€è¦çš„æ•°æ®
+    share_title = "æ´»åŠ¨"+ $("title").text();
+    lc = window.location.href;
+    share_imgUrl = $(".base-figure").eq(0).find("img").attr("src");
+    share_desc =$("title").text();
+
+
+    var app_data_url = encodeURIComponent(lc);
+    var shareDatelink = "http://a.happyjuzi.com/weixin.php?url="+app_data_url;
+    document.write("<script type=\"text/javascript\" src=\""+shareDatelink+"\">"+"</scr"+"ipt>");
+
+
+
+    //åˆ†äº«å‡ºå»ä¹‹å
+    wx.config({
+        debug: false,
+        appId: 'wxd92ccb751aa7075b',
+        timestamp: timestampData,
+        nonceStr: nonceStrData,
+        signature: signatureData,
+        jsApiList: ['checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo']
+    });
+
+    wx.ready(function(){
+        wx.onMenuShareTimeline({
+            title: share_title,
+            desc: share_title,
+            link: lc,
+            imgUrl: share_imgUrl
+        });
+        //åˆ†äº«ç»™å¾®ä¿¡å¥½å‹
+        wx.onMenuShareAppMessage({
+            title: share_title,
+            desc: share_desc,
+            link: lc,
+            imgUrl: share_imgUrl
+        });
+        //åˆ†äº«ç»™QQ
+        wx.onMenuShareQQ({
+            title: share_title,
+            desc: share_desc,
+            link: lc,
+            imgUrl: share_imgUrl
+        });
+        //åˆ†äº«ç»™QQå¾®åš
+        wx.onMenuShareWeibo({
+            title: share_title,
+            desc: share_desc,
+            link: lc,
+            imgUrl: share_imgUrl
+        });
+    })
+
+
+
+
+
+
+    //åˆ¤æ–­æœ‰æ— å®‰è£…app
     function getUrlParam(name){
         var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);

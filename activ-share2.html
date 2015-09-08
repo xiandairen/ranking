@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta name="apple-mobile-web-app-title" content="活动正文">
+    <link rel="stylesheet" href="http://cdn.happyjuzi.com/statics/a/activity_base.css"/>
+    <title>活动详情</title>
+    <style type="text/css">
+        html{background:#f6f6f6}body{padding:21px;font-family:"思源黑体 CN",Helvetica,Arial,"Microsoft YaHei",sans-serif}.main{width:100%;height:auto;margin-left:auto;margin-right:auto;text-align:center;color:#1c1c1c}.base-figure{max-width:705px;height:auto}.base-figure img{width:100%;height:auto}.base-figure figcaption{text-align:left}.base-figure figcaption{font-size:1rem;line-height:1.7rem}h1{position:relative;width:100%;min-height:28px;text-align:left;padding:1rem 0 .8rem 0}h1 strong{position:absolute;padding:.5rem 2rem;left:-21px;-webkit-border-radius:0 100px 100px 0;border-radius:0 100px 100px 0;background-color:#ff4e00;color:#fff;font-style:normal;font-size:.8rem;font-weight:normal;text-indent:-0.7rem;line-height:.8rem}.des{padding-bottom:1rem;margin-bottom:1rem;font-weight:lighter;font-size:1rem;line-height:1.5rem;text-align:left}.form{width:100%;text-align:left}.form p:nth-last-of-type(1){color:#a7a7a7;font-size:.8rem;text-align:left;font-weight:lighter;margin-bottom:1rem}.form p:nth-last-of-type(2){color:#a7a7a7;font-size:.8rem;font-weight:lighter;margin-bottom:.5rem;line-height:1rem}.form input[type='text']{width:100%;margin-bottom:1rem;padding:1rem 0;background-color:#fff;border:1px solid #ebebeb;text-indent:.8rem}.form span:nth-last-of-type(2),.form span:nth-last-of-type(1){display:block;width:100%;text-align:center;padding-top:1rem;padding-bottom:1rem;border:0;font-size:.8rem;cursor:pointer}.form span:nth-last-of-type(2){background-color:#ff4e00;color:#fff;margin-bottom:2rem}.form span:nth-last-of-type(1){background-color:#bcbcbc;color:#fff}span.hide,p.hide{display:none!important}.have-sign{background-color:#bcbcbc!important;color:#fff!important}
+    </style>
+    <script type="text/javascript">
+        var expired = false; //true 是过期
+        var ua = navigator.userAgent;
+        var blank_img = 0;
+        if (ua.indexOf('Android') > 0) {
+            document.write('<s' + 'cript src="http://a.happyjuzi.com/statics/a/v2.4/android.js"></s' + 'cript>');
+        } else if (ua.indexOf('iPhone') > 0) {
+            document.write('<s' + 'cript src="http://a.happyjuzi.com/statics/a/v2.4/ios.js"></s' + 'cript>');
+        }
+    </script>
+</head>
+<body>
+<main class="main arcArea" data-sart="1441699860" data-end="1444464660">
+    <article class="des">
+        <p>喀什</p><p>zhge dong&nbsp;</p><h1><strong>hello</strong></h1>    </article>
+    <form action="" class="form" data-time="yes">
+        <p>填写完整信息立即参加活动，以下信息仅发起人可见用于联系您，我们不会向任何第三方泄露</p>
+        <input type="text" placeholder="姓名或昵称" value="" class="nickName" maxlength="20"/>
+        <input type="text" placeholder="电话" class="phone" value="" maxlength="11"/>
+        <input type="text" placeholder="收件地址" class="address" maxlength="50"/>
+
+        <p class="tips hide">您所填写的信息不正确！</p>
+        <span value="" class="sign"/>我要参加，提交报名</span>
+        <span value="" class="end"/>活动已结束</span>
+    </form>
+</main>
+<script src="http://cdn.happyjuzi.com/statics/a/zepto.min.js"></script>
+<script>
+    Zepto(function ($) {
+        if (expired) { //已过期
+            msg(false);
+        } else { //没过期
+            msg(true);
+            $(".sign").bind('click', function (event) {
+                var phone = init().phoneVal();
+                var nickName = init().nickNameVal();
+                var address = init().addressVal();
+                var phoneTest = /^1[3|5|8|4][0-9]\d{4,8}$/;
+                if (phoneTest.test(phone) && nickName.length > 0 && address.length > 0) {
+                    //console.log(userInfo().name + userInfo().phone+userInfo().address);
+                    var redo = true;
+                    if (redo) { //第一次提交
+                        init().haveSign();//已报名"字体"和"提交按钮"改变样式
+                        var data = '&a_id=12&name=' + userInfo().name + "&tel=" + userInfo().phone + "&address=" + userInfo().address;
+                        $.ajax({
+                            type: "get",
+                            url: "http://testadmin.app.happyjuzi.com/Home/Index/activity_do",
+                            data: data,
+                            success: function (data) {
+                                console.log(data)
+                                redo = false;
+                                $(".sign").unbind("click");
+                            }
+                        });
+                    } else {
+                        $(".sign").unbind("click");
+                        return false; //防止重复提交
+                    }
+                } else {
+                    init().tips.removeClass("hide");
+                    warnTip();
+                    return false
+                }
+            })
+
+        }
+    });
+
+
+    function init() {
+        return {
+            tips: $(".tips"),
+            sign: $(".sign"),
+            end: $(".end"),
+            nickName: $(".nickName"),
+            phone: $(".phone"),
+            address: $(".address"),
+            nickNameVal: function () {
+                return this.nickName.val()
+            },
+            phoneVal: function () {
+                return this.phone.val()
+            },
+            addressVal: function () {
+                return this.address.val()
+            },
+            haveSign: function () {
+                return this.sign.addClass("have-sign").text('已报名');
+            }
+        }
+    }
+
+    function userInfo() {
+        return {
+            name: init().nickNameVal(),
+            phone: init().phoneVal(),
+            address: init().addressVal()
+        }
+    }
+
+    function msg(t) {
+        if (t) {
+            init().nickName.removeAttr("disabled");
+            init().phone.removeAttr("disabled");
+            init().address.removeAttr("disabled");
+            init().sign.removeClass("hide");
+            init().end.addClass("hide");
+        } else {
+            init().nickName.attr("disabled", "disabled");
+            init().phone.attr("disabled", "disabled");
+            init().address.attr("disabled", "disabled");
+            init().sign.addClass("hide");
+            init().end.removeClass("hide");
+        }
+    }
+
+
+    function warnTip() {
+        var inputs = [init().nickName, init().phone, init().address];
+        $.each(inputs, function (i, n) {
+            n.focus(function () {
+                init().tips.addClass("hide");
+            })
+        })
+    }
+
+</script>
+
+
+</body>
+</html>
