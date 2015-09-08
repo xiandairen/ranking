@@ -132,7 +132,7 @@
     statPoint(more_v,null);
 
     //微信需要的数据
-    share_title = "活动"+ $("title").text();
+    share_title = "活动|"+ $("title").text();
     lc = window.location.href;
     share_imgUrl = $(".base-figure").eq(0).find("img").attr("src");
     share_desc =$("title").text();
@@ -142,9 +142,52 @@
     var shareDatelink = "http://a.happyjuzi.com/weixin.php?url="+app_data_url;
     document.write("<script type=\"text/javascript\" src=\""+shareDatelink+"\">"+"</scr"+"ipt>");
 
+    $(function() {
+        wx.config({
+            debug: true,
+            appId: 'wxd92ccb751aa7075b',
+            timestamp: timestampData,
+            nonceStr: nonceStrData,
+            signature: signatureData,
+            jsApiList: ['checkJsApi',
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo']
+        });
 
+        wx.ready(function(){
+            wx.onMenuShareTimeline({
+                title: share_title,
+                desc: share_title,
+                link: lc,
+                imgUrl: share_imgUrl
+            });
+            //分享给微信好友
+            wx.onMenuShareAppMessage({
+                title: share_title,
+                desc: share_desc,
+                link: lc,
+                imgUrl: share_imgUrl
+            });
+            //分享给QQ
+            wx.onMenuShareQQ({
+                title: share_title,
+                desc: share_desc,
+                link: lc,
+                imgUrl: share_imgUrl
+            });
+            //分享给QQ微博
+            wx.onMenuShareWeibo({
+                title: share_title,
+                desc: share_desc,
+                link: lc,
+                imgUrl: share_imgUrl
+            });
+        })
+    })
     //分享出去之后
-    wx.config({
+/*    wx.config({
         debug: false,
         appId: 'wxd92ccb751aa7075b',
         timestamp: timestampData,
@@ -185,7 +228,7 @@
             link: lc,
             imgUrl: share_imgUrl
         });
-    })
+    })*/
 
 
 

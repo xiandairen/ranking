@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>橘子娱乐|用户排行榜 </title>
+    <link rel="stylesheet" href="./css/base.css"/>
+    <link rel="stylesheet" href="./css/userRanking.css"/>
+    <script src="http://cdn.happyjuzi.com/statics/a/zepto.min.js"></script>
+    <script src="http://cdn.happyjuzi.com/statics/a/jweixin-1.0.0.js"></script>
+</head>
+<body>
+<main class="main">
+    <section class="top">
+        <img src="./images/ranking-top-bg.jpg" alt=""/>
+        <span class="join-juzi">点击我参加哦!</span>
+    </section>
+    <section class="ranking-num clearfix">
+        <img src="./images/ranking-title.jpg" alt=""/>
+    </section>
+    <section class="your-rank clear">
+        <div class="rank-top-icon">
+            <i></i>
+            <i><img src="./images/your-rangking.jpg" alt=""/></i>
+        </div>
+        <!--已登陆-->
+        <div class="my-info hide clearfix">
+            <div class="info-l">
+                <strong>12</strong><em>名</em>
+            </div>
+            <div class="info-center">
+                <span class="base-pic" data-img="http://images11.app.happyjuzi.com/news/201508/27/55de958a27c78.jpg?imageView2/1/w/254/h/190/format/WEBP"></span>
+                <span>juzi孙悟空</span>
+            </div>
+            <div class="info-r">
+                <strong>1397</strong><em>分</em>
+            </div>
+        </div>
+    </section>
+    <!--未登录-->
+    <div class="ranking-list user-no-login">
+        <ul class="list-box">
+            <li>
+                <div class="total"><em>0</em></div>
+                <div class="pic-info">
+                    <span class="base-pic user-pic" data-img="http://images11.app.happyjuzi.com/news/201508/27/55de958a27c78.jpg?imageView2/1/w/254/h/190/format/WEBP"></span>
+                    <span >NO MANE NO</span>
+                </div>
+                <div class="self-rank">
+                    <div class="no-login-r">
+                        <span>请您登录</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!--排名列表-->
+    <div class="ranking-list">
+        <ul class="list-box">
+            <li>
+                <div class="total"><em>1</em></div>
+                <div class="pic-info">
+                    <span class="base-pic user-pic" data-img="http://images11.app.happyjuzi.com/news/201508/27/55de958a27c78.jpg?imageView2/1/w/254/h/190/format/WEBP"></span>
+                    <span >NO MANE NO</span>
+                </div>
+                <div class="self-rank"><em>9987</em></div>
+            </li>
+            <li>
+                <div class="total"><em>2</em></div>
+                <div class="pic-info">
+                    <span class="base-pic user-pic" data-img="http://images11.app.happyjuzi.com/news/201508/27/55de958a27c78.jpg?imageView2/1/w/254/h/190/format/WEBP"></span>
+                    <span >NO MANE NO</span>
+                </div>
+                <div class="self-rank"><em>9987</em></div>
+            </li>
+            <li>
+                <div class="total"><em>3</em></div>
+                <div class="pic-info">
+                    <span class="base-pic user-pic" data-img="http://images11.app.happyjuzi.com/news/201508/27/55de958a27c78.jpg?imageView2/1/w/254/h/190/format/WEBP"></span>
+                    <span >NO MANE NO</span>
+                </div>
+                <div class="self-rank"><em>9987</em></div>
+            </li>
+            <li>
+                <div class="total"><em>4</em></div>
+                <div class="pic-info">
+                    <span class="base-pic user-pic" data-img="http://images11.app.happyjuzi.com/news/201508/27/55de958a27c78.jpg?imageView2/1/w/254/h/190/format/WEBP"></span>
+                    <span >NO MANE NO</span>
+                </div>
+                <div class="self-rank"><em>9987</em></div>
+            </li>
+            <li>
+                <div class="total"><em>5</em></div>
+                <div class="pic-info">
+                    <span class="base-pic user-pic" data-img="http://images11.app.happyjuzi.com/news/201508/27/55de958a27c78.jpg?imageView2/1/w/254/h/190/format/WEBP"></span>
+                    <span >NO MANE NO</span>
+                </div>
+                <div class="self-rank"><em>9987</em></div>
+            </li>
+            <li>
+                <div class="total"><em>6</em></div>
+                <div class="pic-info">
+                    <span class="base-pic user-pic" data-img="http://images11.app.happyjuzi.com/news/201508/27/55de958a27c78.jpg?imageView2/1/w/254/h/190/format/WEBP"></span>
+                    <span >NO MANE NO</span>
+                </div>
+                <div class="self-rank"><em>9987</em></div>
+            </li>
+            <li>
+                <div class="total"><em>7</em></div>
+                <div class="pic-info">
+                    <span class="base-pic user-pic" data-img="http://images11.app.happyjuzi.com/news/201508/27/55de958a27c78.jpg?imageView2/1/w/254/h/190/format/WEBP"></span>
+                    <span >NO MANE NO</span>
+                </div>
+                <div class="self-rank"><em>9987</em></div>
+            </li>
+        </ul>
+        <div class="more">
+            <i></i>
+        </div>
+    </div>
+    <article class="txt-cont">
+        <h3>活动介绍</h3>
+        <p>
+            为了给大家带来最好的观看音乐演出的体验夜间的音乐演出需要凭票入场。
+            你可以通过以下方法来获得House对万斯音乐演出的入场门票。
+        </p>
+        <p>
+            发送每一站的对应“抢票暗号”到面包车官方微信，既有机会获得众议院VANS
+            音乐演出门票。门票获得者名单在VANS.COM.CN公布。获得者将收到短信票
+            领取通知，请携带通知前往指定店铺领票
+        </p>
+    </article>
+    <!--end-->
+    <div class="end">
+        <i></i>
+        <i>END</i>
+    </div>
+
+    <!--分享-->
+    <div class="share">
+        <div class="share-box">
+            <!-- JiaThis Button BEGIN -->
+            <div class="jiathis_style">
+                <div class="base-share"><a class="jiathis_button_weixin" id="wx"></a><i class="clearfix">&nbsp;</i>微信</div>
+                <div class="base-share"><a class="jiathis_button_tsina clearfix" id="wb"></a><i class="clearfix">&nbsp;</i>微博</div>
+                <div class="base-share"><a class="jiathis_button_qzone clearfix" id="qq"></a><i class="clearfix">&nbsp;</i>qq空间</div>
+                <div class="base-share"><a href="javascript:void(0)" data-src="www.happyjuzi.com" id="copyLink" class="clearfix"><span></span></a><i class="clearfix"></i>复制链接</div>
+            </div>
+            <!-- JiaThis Button END -->
+        </div>
+    </div>
+    <p class="juzi-make">橘子娱乐出品</p>
+
+    <div class="artCon">
+        <img src="" alt="" id="img"/>
+
+    </div>
+</main>
+
+
+<!--<script src="./js/userRanking.js"></script>-->
+<script src="http://cdn.happyjuzi.com/statics/a/jweixin-1.0.0.js"></script>
+<!--<script src='http://cdn.happyjuzi.com/statics/a/v2.4/share_new.min.js'></script>-->
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=" charset="utf-8"></script> <!--分享的js-->
+
+
+</body>
+</html>
+
+
