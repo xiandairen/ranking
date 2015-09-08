@@ -141,7 +141,6 @@
     var app_data_url = encodeURIComponent(lc);
     var shareDatelink = "http://a.happyjuzi.com/weixin.php?url="+app_data_url;
     document.write("<script type=\"text/javascript\" src=\""+shareDatelink+"\">"+"</scr"+"ipt>");
-    console.log(signatureData+nonceStrData+timestampData)
 
 
     //分享出去之后
