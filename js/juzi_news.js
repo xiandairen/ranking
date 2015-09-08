@@ -387,7 +387,7 @@ var statPoint = function(uid,mid,ver,phone,os,ov,rs,net,channel,more){
     var navi = window.navigator;
     var ua = navigator.appVersion;
     var mid = getUrlString('mid');
-    var ph = getUrlString('pf');
+    var ph = getUrlString('ph');
     var os = getUrlString('pf');
     var id = getUrlString("id");
     var version = navi.appVersion.substr(ua.indexOf('version/')+8,4);
@@ -404,12 +404,11 @@ var statPoint = function(uid,mid,ver,phone,os,ov,rs,net,channel,more){
     var rc = getUrlString("rc");
     var rcc = getUrlString("rcc");
     var pro = getUrlString("pro");
-    var os = getUrlString("os");
    //- var ov = getUrlString("ov");
     var uuid = getUrlString("uuid");
     var myDate = Math.round(new Date() / 1000);//时间戳，需要传给统计后台
     var url = 'http://d.happyjuzi.com:8011/in';
-    var data = 'head?pro=juzi&uid='+id+'&mid='+mid+'&ver='+ver+'&mac='+mac+'&cid='+cid+"&pro="+pro+'&ph='+ph+"&uuid="+uuid+"&ov="+ov+"&os="+os+'&rs='+rs+'&net='+net+'&ch='+ch+"&rc="+rc+"&rcc="+rcc+"&myDate="+myDate+more;
+    var data = 'head?pro=juzi&uid='+id+'&mid='+mid+'&ver='+ver+'&mac='+mac+'&cid='+cid+"&pro="+pro+'&ph='+ph+"&uuid="+uuid+"&ov="+ov+"&os="+os+'&rs='+rs+'&net='+net+'&ch='+ch+"&rc="+rc+"&rcc="+rcc+"&tm="+myDate+more;
     $.ajax({
         type: 'POST',
         url: url,
@@ -441,4 +440,27 @@ function getUrlString(name) {
         }
     }
     return '';
+}
+
+//手机型号
+function phoneName(){
+    var reg = /\(.*?\)/;
+    var system = navigator.userAgent.toLowerCase().replace(/\s/g, '').match(reg)[0];
+    var system = system.slice(1, system.length - 1);
+    var os;
+    function f1(str, flag) {
+        var reg = /(\w{0,}\d{0,})+([/])/g;
+        if (flag) {
+            var str1 = str.match(reg)[0];
+            os = str1.replace('build/', '');
+            return os;
+        } else {
+            os = str.indexOf(';') > 0 ? str.split(';')[0] : str;
+            return os;
+        }
+    }
+    system.indexOf('build/') > 0 ? f1(system, true) : f1(system, false);
+    // console.log(os);
+    // alert(os)
+    return os;
 }

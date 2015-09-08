@@ -318,8 +318,12 @@ $("<div id='hide-danmu' class='yes' style='-webkit-tap-highlight-color: rgba(0,0
 $("#hide-danmu").on('click',function(){
     if($(this).hasClass('yes')){
         $(this).text('打开弹幕').removeClass('yes');
+        var more_open = 'dp?mod=v&id='+getArtId+'&src=1&from='+getUrlString('d_source')+'fuid='+getUrlString('fromuid');
+        statPoint('','','','','','','','','',more_open);
     }else{
         $(this).text('关闭弹幕').addClass('yes');
+        var more_close = 'dp?mod=v&id='+getArtId+'&src=1&from='+getUrlString('d_source')+'fuid='+getUrlString('fromuid');
+        statPoint('','','','','','','','','',more_close);
     }
     $("#commentArea").toggle('3000');
 });
