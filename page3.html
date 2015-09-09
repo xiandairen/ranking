@@ -28,6 +28,7 @@
             top: 0;
             width: 100%;
             height: 200px;
+            transform-origin: center center;
             /*  border: 1px solid red;*/
 
         }
@@ -44,16 +45,15 @@
 
         .wrap {
             position: relative;
-           /* top: 200px;*/
             z-index: 5;
             width: 90%;
-            padding: 0 5%;
+            padding: 20px 5% 20px 5%;
             transform: translateY(200px);
             background-color: #FFFFFF;
         }
 
         .title {
-            margin: 0px;
+            margin: 0 auto 20px auto;
         }
 
         .title i {
@@ -213,64 +213,80 @@
 
         $("body").on({
             "swipeUp": function (event) {
-                var wrapVal = Number($(".wrap").css("top").replace("px", ""));
+               /* var wrapVal = Number($(".wrap").css("top").replace("px", ""));
                 if (wrapVal <= topBgH) {
                     $(".wrap-pic").css({"height": 200})
-                }
+                }*/
 
+               /* $(window).on("scroll", function () {
+                    var winY = window.scrollY;
+                    if (winY >= 0 && winY <= topBgH) {
+                        //console.log(window.scrollY);
+                        $(".topbg").css({
+                            transform: "translateY(" + -(winY / 3) + "px)"
+                        })
+                    } else if (winY > topBgH) {
+                        $(".share-box").removeClass("moveLefC").addClass("moveLeft")
+
+                    } else if (winY < topBgH) {
+                        $(".wrap-pic").css({"height": 200})
+                    }
+
+                    if (winY == 0) {
+                        $(".share-box").removeClass("moveLeft").addClass("moveLefC");
+                        $(".wrap-pic").css({"height": 200})
+                    }
+
+                })*/
             },
             "swipeDown": function (event) {
-                /*   $(".wrap").css({
-                 //"WebkitTransform":"translateY("+getMatrix().pop()+100+"px)",
-                 top:Number($(".wrap").css("top").replace("px",""))+50
-                 });
+                var x = 0, y = 0;
+                document.addEventListener("touchstart", function (ev) {
+                    var disx = ev.targetTouches[0].pageX - x;
+                    var disy = ev.targetTouches[0].pageY - x;
+                    document.title = disx + "__" + disy;
+                    function fnMove(ev) {
+                        x = ev.targetTouches[0].pageX - disx;
+                        y = ev.targetTouches[0].pageY - disy;
+                        $(".wrap-pic").css({
+                            height: (200 + (y)/2)
+                        });
+                        $(".topbg").css({
+                            transform: "scale(" + "1." + (y / 100) + ")"
+                        });
+                        $(".wrap").css({
+                            transform: "translateY(" + (200 + (y)/2) + "px)"
+                        })
 
-                 $(".wrap-pic").css({
-                 height: $(".wrap-pic").height()+50
-                 })*/
+                    }
+
+                    function fnEnd(ev) {
+                        $(".wrap-pic").animate({
+                            "height":200
+                        },300)
+
+                        $(".wrap").animate({
+                            transform:"translateY(200px)"
+                        },300);
+
+                        $(".topbg").css({
+                            transform: "scale(1)"
+                        },300)
+
+
+                        document.removeEventListener("touchmove", fnMove, false);
+                        document.removeEventListener("touchend", fnEnd, false)
+
+                    }
+
+                    document.addEventListener("touchmove", fnMove, false);
+                    document.addEventListener("touchend", fnEnd, false)
+
+                }, false)
+
 
             }
         })
-
-        var body = document.getElementsByTagName("body");
-
-        var x = 0, y = 0;
-        document.addEventListener("touchstart", function (ev) {
-            var disx = ev.targetTouches[0].pageX - x;
-            var disy = ev.targetTouches[0].pageY - x;
-            document.title = disx +"__"+disy;
-            function fnMove(ev){
-                x = ev.targetTouches[0].pageX - disx;
-                y = ev.targetTouches[0].pageY - disy;
-                $(".wrap-pic").css({
-                    height:(200+y)
-                });
-                $(".topbg").css({
-                    transform:"scale("+"1."+(y/100)+")"
-                });
-                $(".wrap").css({
-                    transform:"translateY("+(200+y)+"px)"
-                })
-
-            }
-            function fnEnd(ev){
-                $(".wrap-pic").css({"height":"200px"});
-                $(".wrap").css({transform:"translateY(200px)"});
-                $(".topbg").css({
-                    transform:"scale(1)"
-                })
-
-
-
-                document.removeEventListener("touchmove",fnMove,false);
-                document.removeEventListener("touchend",fnEnd,false)
-
-            }
-
-            document.addEventListener("touchmove",fnMove,false);
-            document.addEventListener("touchend",fnEnd,false )
-
-        }, false)
 
 
     })(Zepto);
