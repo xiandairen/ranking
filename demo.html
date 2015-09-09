@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0">
+    <style>
+        *{ margin:0; padding:0; list-style:none;}
+        .strive_slider{ width:320px; height:148px; margin:0 auto; overflow:hidden; position:relative;}
+        .strive_slider ul{ position:absolute; left:0; top:0;}
+        .strive_slider ul li{ float:left; width:320px; height:148px;}
+        .strive_slider ul li a{ display:block; width:100%; height:100%;}
+
+        .strive_slider ol{ width:90px; position:absolute; bottom:8px; left:50%; margin-left:-45px;}
+        .strive_slider ol li{ width:10px; height:10px; background:#999; border-radius:50%; float:left; margin:3px;}
+        .strive_slider ol li.on{ background:#f60;}
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            var oBox=document.querySelector('.strive_slider');
+            var oUl=oBox.getElementsByTagName('ul')[0];
+            var aLi=oUl.children;
+            var oOl=oBox.getElementsByTagName('ol')[0];
+            var aBtn=oOl.children;
+            var aA=oUl.getElementsByTagName('a');
+
+
+            //复制一个
+            oUl.innerHTML+=oUl.innerHTML;
+            oUl.style.width=aLi.length*aLi[0].offsetWidth+'px';
+            var W=oUl.offsetWidth/2;
+
+            var tX=0;
+            var iNow=0;
+            oUl.addEventListener('touchstart',function(ev){
+                var downX=ev.targetTouches[0].pageX;
+                var disX=downX-tX;
+
+                clearInterval(oUl.timer);
+
+                function fnMove(ev){
+                    tX=ev.targetTouches[0].pageX-disX;
+
+                    if(tX<0){
+                        oUl.style.WebkitTransform='translateX('+tX%W+'px)';
+                    }else{
+                        oUl.style.WebkitTransform='translateX('+(tX%W-W)%W+'px)';
+                    }
+                    ev.preventDefault();
+                }
+                function fnEnd(ev){
+                    var upX=ev.changedTouches[0].pageX;
+
+                    if(Math.abs(downX-upX)<50){
+                        startMove(oUl,-iNow*aLi[0].offsetWidth);
+                    }else{
+                        if(downX>upX){ //++
+                            iNow++;
+                            startMove(oUl,-iNow*aLi[0].offsetWidth);
+                            tab();
+                        }else{
+                            iNow--;
+                            startMove(oUl,-iNow*aLi[0].offsetWidth);
+                            tab();
+                        }
+                    }
+                    //完毕
+                    oUl.removeEventListener('touchmove',fnMove,false);
+                    oUl.removeEventListener('touchend',fnEnd,false);
+                }
+                oUl.addEventListener('touchmove',fnMove,false);
+                oUl.addEventListener('touchend',fnEnd,false);
+
+            },false);
+            //按钮切换
+            function tab(){
+                for(var i=0; i<aBtn.length; i++){
+                    aBtn[i].className='';
+                }
+                if(iNow>0){
+                    aBtn[iNow%aBtn.length].className='on';
+                }else{
+                    aBtn[(iNow%aBtn.length+aBtn.length)%aBtn.length].className='on';
+                }
+            }
+
+            function startMove(obj,iTarget){
+                clearInterval(obj.timer);
+                var count=Math.floor(500/30);
+                var start=tX;
+                var dis=iTarget-start;
+                var n=0;
+                obj.timer=setInterval(function(){
+                    n++;
+
+                    var a=1-n/count;
+                    tX=start+dis*(1-a*a*a);
+
+                    if(tX<0){
+                        oUl.style.WebkitTransform='translateX('+tX%W+'px)';
+                    }else{
+                        oUl.style.WebkitTransform='translateX('+(tX%W-W)%W+'px)';
+                    }
+
+                    if(n==count){
+                        clearInterval(obj.timer);
+                    }
+                },30);
+            }
+
+            oUl.addEventListener('click',function(){
+                var n=iNow>0?iNow%aBtn.length:(iNow%aBtn.length+aBtn.length)%aBtn.length;
+                window.location.href=aA[n].dataset.href;
+            },false);
+        },false);
+    </script>
+</head>
+
+<body>
+<div class="strive_slider">
+    <ul>
+        <li><a data-href="http://www.itstrive.com"><img src="img/1.png"></a></li>
+        <li><a data-href="http://www.baidu.com"><img src="img/2.png"></a></li>
+        <li><a data-href="http://www.taobao.com"><img src="img/3.png"></a></li>
+        <li><a data-href="http://www.tmall.com"><img src="img/4.png"></a></li>
+        <li><a data-href="http://www.itstrive.com"><img src="img/5.png"></a></li>
+    </ul>
+    <ol>
+        <li class="on"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ol>
+</div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: darkgreen;
+        }
+
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script type="text/javascript">
+  var box = document.querySelector(".box");
+  var tX=0;
+  var iNow=0;
+  box.addEventListener('touchstart',function(ev){
+      var downX=ev.targetTouches[0].pageX;
+      var disX=downX-tX;
+
+      //clearInterval(oUl.timer);
+
+      function fnMove(ev){
+          tX=ev.targetTouches[0].pageX-disX;
+
+         /* if(tX<0){
+              oUl.style.WebkitTransform='translateX('+tX%W+'px)';
+          }else{
+              oUl.style.WebkitTransform='translateX('+(tX%W-W)%W+'px)';
+          }*/
+          console.log(tX)
+          ev.preventDefault();
+      }
+      function fnEnd(ev){
+          var upX=ev.changedTouches[0].pageX;
+
+         /* if(Math.abs(downX-upX)<50){
+              startMove(oUl,-iNow*aLi[0].offsetWidth);
+          }else{
+              if(downX>upX){ //++
+                  iNow++;
+                  startMove(oUl,-iNow*aLi[0].offsetWidth);
+                  tab();
+              }else{
+                  iNow--;
+                  startMove(oUl,-iNow*aLi[0].offsetWidth);
+                  tab();
+              }
+          }*/
+          //完毕
+          oUl.removeEventListener('touchmove',fnMove,false);
+          oUl.removeEventListener('touchend',fnEnd,false);
+      }
+      oUl.addEventListener('touchmove',fnMove,false);
+      oUl.addEventListener('touchend',fnEnd,false);
+
+  },false);
+
+</script>
+</body>
+</html>
