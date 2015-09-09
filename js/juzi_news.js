@@ -353,7 +353,7 @@ $(function(){
             myAudio.play();
             $('.audio-bar').removeClass('audio-ing');
             _this.addClass('audio-ing');
-            statPoint('','','','','','','','','','event?mod=auon&arg='+news_id);
+            statPoint('event?mod=auon&arg='+news_id, null);
             //监听停止事件
             myAudio.addEventListener('ended', function(){
                 _this.removeClass('audio-ing');
@@ -362,7 +362,7 @@ $(function(){
             myAudio.currentTime=0;
             myAudio.pause();
             _this.removeClass('audio-ing');
-            statPoint('','','','','','','','','','event?mod=auoff&arg='+news_id);
+            statPoint('event?mod=auoff&arg='+news_id, null);
         }
 
     })
@@ -381,20 +381,18 @@ $(function(){
 
 })
 
+
 //埋点方法
-//var statPoint = function(uid,ver,channel,more){
-var statPoint = function(uid,mid,ver,phone,os,ov,rs,net,channel,more){
+var statPoint = function(more,callback){
     var navi = window.navigator;
     var ua = navigator.appVersion;
     var mid = getUrlString('mid');
-    var ph = getUrlString('ph');
-    var os = getUrlString('pf');
+    var ph = getUrlString('ph')|| phoneName();
+    var os = getUrlString('pf') || sys();
     var id = getUrlString("id");
     var version = navi.appVersion.substr(ua.indexOf('version/')+8,4);
     var ov = version=='cint' ? '' : version;
-    //var phone = getUrlString('ph');
     var mac = getUrlString('mac');
-    //var myDate = new Date();
     var rs = getUrlString('res') ||  window.screen.width+'*'+window.screen.height;
     var net = getUrlString('net');
     var uid = getUrlString('uid');
@@ -404,7 +402,6 @@ var statPoint = function(uid,mid,ver,phone,os,ov,rs,net,channel,more){
     var rc = getUrlString("rc");
     var rcc = getUrlString("rcc");
     var pro = getUrlString("pro");
-   //- var ov = getUrlString("ov");
     var uuid = getUrlString("uuid");
     var myDate = Math.round(new Date() / 1000);//时间戳，需要传给统计后台
     var url = 'http://d.happyjuzi.com:8011/in';
@@ -422,10 +419,17 @@ var statPoint = function(uid,mid,ver,phone,os,ov,rs,net,channel,more){
         },
         error: function(xhr, type){
             console.log('Ajax error!');
+        },
+        complete:function(){
+            if(typeof callback == 'function'){
+                callback()
+            }else{
+                callback;
+            }
+
         }
     })
 }
-
 //获取URL参数
 function getUrlString(name) {
     var reg = new RegExp("(^|&)"+name+"=([^&]*)(&|$)");
@@ -441,8 +445,7 @@ function getUrlString(name) {
     }
     return '';
 }
-
-//手机型号
+//判断手机机型
 function phoneName(){
     var reg = /\(.*?\)/;
     var system = navigator.userAgent.toLowerCase().replace(/\s/g, '').match(reg)[0];
@@ -455,12 +458,51 @@ function phoneName(){
             os = str1.replace('build/', '');
             return os;
         } else {
-            os = str.indexOf(';') > 0 ? str.split(';')[0] : str;
+            if(/nokia/.test(str)){
+                os = (function(cont){
+                    var s = '',conts = cont.length;
+                    for(var i = 0;i<conts;i++){
+                        if(s.indexOf(";") > 0){
+                            return s.split(";")[1]
+                        }else{
+                            s+=cont.substring(conts,conts-i)
+                        }
+                    }
+                })(str)
+
+            }else{
+                os = str.indexOf(';') > 0 ? str.split(';')[0] : str;
+            }
             return os;
         }
     }
     system.indexOf('build/') > 0 ? f1(system, true) : f1(system, false);
-    // console.log(os);
+    console.log(os);
     // alert(os)
     return os;
+}
+//判断手机系统
+function sys() {
+    var nav = navigator.userAgent.toLowerCase().replace(/\s/g, "");
+    var sys = ['iphone', 'android', "ipad", "windowsphone", "meego"];
+    var system;
+    if (/iphone|android|ipad|windowsphone|meego/.test(nav)) {
+        for (var i = 0; i < sys.length; i++) {
+            if (nav.indexOf(sys[i]) > 0) {
+                system = sys[i];
+                break;
+            }
+        }
+    } else {
+        system = 'other';
+    }
+
+    if (system == 'iphone' || system == 'ipad') {
+        system = 'ios';
+    } else if (system == 'other') {
+        system = 'other';
+    }
+
+    console.log(system);
+    return system;
 }

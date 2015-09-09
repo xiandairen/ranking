@@ -1,7 +1,7 @@
 (function($){
     var ua = navigator.userAgent.toLowerCase();
     //埋点方法
-    var statPoint = function(more,callback){
+    var statPoint = function(uid,mid,ver,phone,os,ov,rs,net,channel,more,callback){
         var navi = window.navigator;
         var ua = navigator.appVersion;
         var mid = getUrlString('mid');
@@ -129,13 +129,14 @@
     //浏览统计
     var getArtId =$(".artWrap").attr("id"); // 这是传给后台文章的id
     var more_v = 'dp?mod=v&id='+getArtId+'&src=1&from='+getUrlString('d_source')+'fuid='+getUrlString('fromuid');
-    statPoint(more_v,null);
+    statPoint("","","","","","","","","",more_v,null);
 
     //微信需要的数据
-    share_title = "活动|"+ $("title").text();
-    lc = window.location.href;
-    share_imgUrl = $(".base-figure").eq(0).find("img").attr("src");
-    share_desc =$("title").text();
+    //var share_title = "活动|"+ $("title").text();
+    var share_title ="活动|清新福利：家佳亲笔签名照";
+    var lc = window.location.href;
+    var share_imgUrl = $(".base-figure").eq(0).find("img").attr("src");
+    var share_desc ="活动|清新福利：家佳亲笔签名照";
 
 
     var app_data_url = encodeURIComponent(lc);
@@ -263,7 +264,7 @@
     $(".shareDownbtn").click(function() {
         var _this = $(this);
         var dl2 = 'func?mod=dl&fuid='+getUrlString('fromuid');
-        statPoint(dl2,null);
+        statPoint("","","","","","","","","",dl2,null);
         setTimeout(function(){
             if (ua.indexOf("micromessenger") > -1) {
                 window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.happyjuzi.apps.juzi";
