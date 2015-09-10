@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script src="./js/zepto.min.js"></script>
+    <title></title>
+    <style type="text/css">
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: "黑体", Helvetica, Arial, "Microsoft YaHei", sans-serif;
+            font-size: 12px;
+        }
+
+        .top{
+            display: none;
+            width: 100%;
+            height: 100px;
+        }
+        .top .bg{
+            width: 100%;
+            height: 100%;
+            background-color: #54adb5;
+        }
+        .main {
+            width: auto;
+            padding: 0px 10px;
+            background-color: #E3E3E3;
+            position: relative;
+        }
+
+        .title {
+            font-size: 14px;
+            font-size: 14px;
+            /*background-color: rgba(10,10,10,.3);*/
+            width: 100%;
+            display: block;
+            margin-bottom: 80px;
+        }
+
+        .title i {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border-radius: 20%;
+            background-color: #55b4a8;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        .share-box {
+            position: absolute;
+            top: 60px;
+            width: 100%;
+            text-align: center;
+            /*background-color: rgba(10,10,10,.2);*/
+            -webkit-animation-fill-mode: forwards;
+        }
+      /*  .share-box-left{
+            transform: translate(-100px,0);
+            transition: transform .5s ease;
+        }
+        .share-box-c{
+            transform: translate(0px,0);
+            transition: transform .5s ease;
+        }*/
+
+        .share-box span {
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .share-box span i {
+            display: inline-block;
+            position: relative;
+            z-index: 20;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: darkorange;
+            vertical-align: middle;
+        }
+
+        .share-box span:last-child i {
+            background-color: #f0c961;
+        }
+
+        .share-box span em {
+            font-style: normal;
+            padding: 0 5px;
+        }
+
+        .base-txt {
+            -webkit-animation-fill-mode: forwards;
+
+        }
+
+        .article {
+            margin: 20px 0;
+        }
+
+        .article p {
+            font-size: 14px;
+            line-height: 25px;
+            text-indent: 2em;
+        }
+
+        .iconLeft {
+            -webkit-animation: iconOne .5s ease;
+            -webkit-animation-fill-mode: forwards;
+        }
+
+        .TxtLeft {
+            -webkit-animation: TxtOne .5s ease;
+            -webkit-animation-fill-mode: forwards;
+        }
+
+        .TxtC{
+            -webkit-animation: TxtTwo .5s ease;
+            -webkit-animation-fill-mode: forwards;
+        }
+        .fix {
+            position: fixed;
+            top: 40px;
+            margin: 0;
+            transition: top 1s ease;
+            /*transform: translate(0, -40px)*/
+        }
+
+        @-webkit-keyframes iconOne {
+            0% {
+                -webkit-transform: translate(-95px, 0)
+            }
+            100% {
+                -webkit-transform: translate(0px, 0)
+            }
+        }
+
+        @-webkit-keyframes TxtOne {
+            0% {
+                -webkit-transform: translate(0px, 0)
+            }
+            0% {
+                -webkit-transform: translate(-95px, 0)
+            }
+        }
+        @-webkit-keyframes TxtTwo {
+
+            0% {
+                -webkit-transform: translate(0px, 0)
+            }
+            0% {
+                -webkit-transform: translate(-95px, 0)
+
+            }
+        }
+
+
+
+
+        .share-box-left{
+            -webkit-animation: box-L .3s ease;
+            -webkit-animation-fill-mode: forwards;
+        }
+        .share-box-c{
+            -webkit-animation: box-C .3s ease;
+            -webkit-animation-fill-mode: forwards;
+        }
+        @-webkit-keyframes box-L {
+            0%{
+                -webkit-transform: translate(0px,0px);
+            }
+            100%{
+                -webkit-transform: translate(-100px,0px);
+            }
+        }
+        @-webkit-keyframes box-C {
+            0%{
+                -webkit-transform: translate(-100px,0px);
+            }
+            100%{
+                -webkit-transform: translate(0px,0px);
+            }
+        }
+
+
+
+        .hide{
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+    (function ($) {
+
+
+        $(window).on("scroll", function (ev) {
+            var y = window.scrollY;
+            var baseTxt = $(".base-txt");
+            var shareBox = $(".share-box");
+            var shareOne = $(".base-share").eq(0);
+            var shareTwo = $(".base-share").eq(1);
+            var baseTxt= $(".base-txt").eq(0);
+            var baseTxt= $(".base-txt").eq(1);
+
+            console.log(y)
+            if (y >= 50) {
+                $(".share-box").addClass("fix");
+                $(".base-share").addClass("iconLeft");
+                $(".base-txt").addClass("hide");
+                $(".share-box").removeClass("share-box-c").addClass("share-box-left");
+
+
+            } else if (y < 50) {
+                $(".share-box").removeClass("fix");
+                $(".base-txt").removeClass("hide").addClass("TxtLeft");
+                $(".share-box").removeClass("share-box-left").addClass("share-box-c");
+            }
+
+        })
+
+
+    })(Zepto);
+
+
+</script>
+<div class="top">
+    <div class="bg"></div>
+</div>
+<main class="main">
+    <strong class="title"><i></i>这是头部的一个标题</strong>
+
+    <div class="share-box">
+        <span class="base-share"><i></i><em class="base-txt">分享</em></span>
+        <span class="base-share"><i></i><em class="base-txt">收藏</em></span>
+    </div>
+    <article class="article">
+        <p>这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容
+        </p>
+
+        <p>这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容
+        </p>
+
+        <p>这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容
+        </p>
+
+        <p>这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容
+        </p>
+
+        <p>这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容这是文章的内容这是文章的内容这是文章的内容
+            这是文章的内容
+        </p>
+    </article>
+
+</main>
+
+</body>
+</html>

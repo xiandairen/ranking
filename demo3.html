@@ -45,12 +45,13 @@
         }
 
         .wrap {
-            position: relative;
-            z-index: 5;
+            /* position: relative;
+             z-index: 5;*/
             width: 90%;
             padding: 20px 5% 20px 5%;
-            transform: translateY(200px);
+            /* transform: translateY(200px);*/
             background-color: #FFFFFF;
+            margin-top: 100px;
         }
 
         .title {
@@ -72,12 +73,7 @@
         .share-box {
             width: 100%;
             text-align: center;
-            transform: translateX(0);
-        }
-
-        .fix {
-            position: fixed;
-            top: 30px;
+            /*transform: translateX(0);*/
         }
 
         .moveLeft {
@@ -96,14 +92,15 @@
             margin-right: 30px;
         }
 
-        .share-box span i {
+        .share-box span, .share-box span i {
             font-style: normal;
+            -webkit-animation-fill-mode: forwards;
         }
 
         .share-box span:first-child i:nth-of-type(1), .share-box span:last-child i:nth-of-type(1) {
             display: inline-block;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background-color: #ea4c84;
             vertical-align: middle;
@@ -112,7 +109,6 @@
 
         .share-box span:last-child i:nth-of-type(1) {
             background-color: #1680f7;
-            -webkit-animation: moveLeftI 3s ease;
             -webkit-animation-fill-mode: forwards;
         }
 
@@ -121,33 +117,40 @@
             text-indent: 2em;
         }
 
-        @-webkit-keyframes runL {
-            to {
+        .fix {
+            position: fixed;
+            top: 30px;
+        }
 
-                transform: translateX(-100px)
-            }
-            from {
-
-                transform: translateX(0px);
-                position: fixed;
-                left: 50px;
-                top: 100px;
-            }
+        .IconRun {
+            -webkit-animation: upIcon .3s ease;
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
 
         }
 
-        @-webkit-keyframes runC {
-            to {
-                transform: translateX(0px)
-            }
+        .TxtRun {
+            -webkit-animation: upTxt .3s ease;
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+        }
+
+        @-webkit-keyframes upIcon {
             from {
-
-                transform: translateX(-100px);
-                position: fixed;
-                left: 50px;
-                top: 100px;
+                transform: translate(0px, 0);
             }
+            to {
+                transform: translate(-100px, 0);
+            }
+        }
 
+        @-webkit-keyframes upTxt {
+            from {
+                transform: translate(0px, 0);
+            }
+            to {
+                transform: translate(-100px, 0);
+            }
         }
 
 
@@ -155,187 +158,31 @@
 </head>
 <body>
 <script type="text/javascript">
-    /*    function unique(arr){
-     var tmp = new Array();
-     for(var i in arr){
-     if(tmp.indexOf(arr[i])==-1){
-     tmp.push(arr[i]);
-     }
-     }
-     return tmp;
-     }*/
-
     (function ($) {
+        $(window).on("scroll", function (ev) {
+            var y = window.scrollY;
+            console.log(y)
+            if (y >= 150) {
 
+                $(".share-box").addClass("fix");
+                //$(".share-box").addClass("IconRun");
+                //$(".share-box span i").addClass("upTxt");
+                $(".base-txt").animate({
+                    display:"none"
+                },100)
 
-        var topBgH = 200;
-        var wrap = $(".wrap");
-        var wrapPic = $(".wrap-pic");
+            } else if (y <= 150) {
 
-        function init() {
-            return {
-                mainTopH: function () {
-                    return getMatrix($(".wrap")).pop()
-                }
-            }
-        }
-
-
-        //取matrix值
-        function getMatrix() {
-            var val = $(".wrap").css("transform").replace(/\s/g, "").match(/\w{0,}/g);
-            var val = val.slice(1, val.length);
-            var arr = [];
-            for (var i = 0; i < val.length; i++) {
-                if (val[i] != "") {
-                    arr.push(Number(val[i]))
-                }
-            }
-            return arr;
-        }
-
-
-        $(window).on("scroll", function () {
-            var winY = window.scrollY;
-            if (winY >= 0 && winY <= topBgH) {
-                //console.log(window.scrollY);
-                $(".topbg").css({
-                    transform: "translateY(" + -(winY / 3) + "px)"
-                })
-            } else if (winY > topBgH) {
-                $(".share-box").removeClass("moveLefC").addClass("moveLeft");
-
-            } else if (winY < topBgH) {
-                $(".wrap-pic").css({"height": 200})
             }
 
-            if (winY == 0) {
-                $(".share-box").removeClass("moveLeft").addClass("moveLefC");
-                $(".wrap-pic").css({"height": 200})
-            }
 
         })
 
-        $("body").on({
-            "swipeUp": function (event) {
-                /* var wrapVal = Number($(".wrap").css("top").replace("px", ""));
-                 if (wrapVal <= topBgH) {
-                 $(".wrap-pic").css({"height": 200})
-                 }*/
 
-                /* $(window).on("scroll", function () {
-                 var winY = window.scrollY;
-                 if (winY >= 0 && winY <= topBgH) {
-                 //console.log(window.scrollY);
-                 $(".topbg").css({
-                 transform: "translateY(" + -(winY / 3) + "px)"
-                 })
-                 } else if (winY > topBgH) {
-                 $(".share-box").removeClass("moveLefC").addClass("moveLeft")
+    })(Zepto)
 
-                 } else if (winY < topBgH) {
-                 $(".wrap-pic").css({"height": 200})
-                 }
-
-                 if (winY == 0) {
-                 $(".share-box").removeClass("moveLeft").addClass("moveLefC");
-                 $(".wrap-pic").css({"height": 200})
-                 }
-
-                 })*/
-
-
-                /*$(window).on("scroll", function () {
-                 var winY = window.scrollY;
-                 if (winY >= 0 && winY <= topBgH) {
-                 //console.log(window.scrollY);
-                 $(".topbg").css({
-                 transform: "translateY(" + -(winY / 3) + "px)"
-                 })
-                 } else if (winY > topBgH) {
-                 $(".share-box").removeClass("moveLefC").addClass("moveLeft");
-
-                 } else if (winY < topBgH) {
-                 $(".wrap-pic").css({"height": 200})
-                 }
-
-                 if (winY == 0) {
-                 $(".share-box").removeClass("moveLeft").addClass("moveLefC");
-                 $(".wrap-pic").css({"height": 200})
-                 }
-
-                 })*/
-            },
-            "swipeDown": function (event) {
-                var x = 0, y = 0;
-                document.addEventListener("touchstart", function (ev) {
-                    var disx = ev.targetTouches[0].pageX - x;
-                    var disy = ev.targetTouches[0].pageY - x;
-                    document.title = disx + "__" + disy;
-                    function fnMove(ev) {
-                        x = ev.targetTouches[0].pageX - disx;
-                        y = ev.targetTouches[0].pageY - disy;
-                        $(".wrap-pic").css({
-                            height: (200 + (y) / 3)
-                        });
-
-                        $(".topbg").css({
-                            transform: "scale(" + (1 + (y / 1500)) + ")"
-                        });
-
-                        $(".wrap").css({
-                            transform: "translateY(" + (200 + (y) / 3) + "px)"
-                        })
-
-                    }
-
-                    function fnEnd(ev) {
-                        $(".wrap-pic").animate({
-                            "height": 200
-                        }, 300);
-
-
-                        $(".wrap").animate({
-                            transform: "translateY(200px)"
-                        }, 300);
-
-
-                        var scale = Number($(".topbg").css("transform").match(/\d/)[0]);
-
-                        function one() {
-                            if (scale == 1) {
-                                return 1;
-                            } else {
-                                scale -= 0.01;
-                            }
-                        }
-
-                        $(".topbg").css({
-                            transform: "scale(1)"
-                        }, 300)
-
-
-                        document.removeEventListener("touchmove", fnMove, false);
-                        document.removeEventListener("touchend", fnEnd, false)
-
-                    }
-
-                    document.addEventListener("touchmove", fnMove, false);
-                    document.addEventListener("touchend", fnEnd, false)
-
-                }, false)
-
-
-            }
-        })
-
-
-    })(Zepto);
 
 </script>
-<div class="wrap-pic">
-    <i class="topbg"></i>
-</div>
 <main class="wrap">
     <h1 class="title"><i></i>换个姿势画画</h1>
 
