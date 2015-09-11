@@ -16,16 +16,18 @@
             font-size: 12px;
         }
 
-        .top{
+        .top {
             display: none;
             width: 100%;
             height: 100px;
         }
-        .top .bg{
+
+        .top .bg {
             width: 100%;
             height: 100%;
             background-color: #54adb5;
         }
+
         .main {
             width: auto;
             padding: 0px 10px;
@@ -60,14 +62,15 @@
             /*background-color: rgba(10,10,10,.2);*/
             -webkit-animation-fill-mode: forwards;
         }
-      /*  .share-box-left{
-            transform: translate(-100px,0);
-            transition: transform .5s ease;
-        }
-        .share-box-c{
-            transform: translate(0px,0);
-            transition: transform .5s ease;
-        }*/
+
+        /*  .share-box-left{
+              transform: translate(-100px,0);
+              transition: transform .5s ease;
+          }
+          .share-box-c{
+              transform: translate(0px,0);
+              transition: transform .5s ease;
+          }*/
 
         .share-box span {
             display: inline-block;
@@ -119,10 +122,11 @@
             -webkit-animation-fill-mode: forwards;
         }
 
-        .TxtC{
+        .TxtC {
             -webkit-animation: TxtTwo .5s ease;
             -webkit-animation-fill-mode: forwards;
         }
+
         .fix {
             position: fixed;
             top: 40px;
@@ -148,6 +152,7 @@
                 -webkit-transform: translate(-95px, 0)
             }
         }
+
         @-webkit-keyframes TxtTwo {
 
             0% {
@@ -159,34 +164,35 @@
             }
         }
 
-        .share-box-left{
+        .share-box-left {
             -webkit-animation: box-L .3s ease;
             -webkit-animation-fill-mode: forwards;
         }
-        .share-box-c{
+
+        .share-box-c {
             -webkit-animation: box-C .3s ease;
             -webkit-animation-fill-mode: forwards;
         }
+
         @-webkit-keyframes box-L {
-            0%{
-                -webkit-transform: translate(0px,0px);
+            0% {
+                -webkit-transform: translate(0px, 0px);
             }
-            100%{
-                -webkit-transform: translate(-100px,0px);
+            100% {
+                -webkit-transform: translate(-100px, 0px);
             }
         }
+
         @-webkit-keyframes box-C {
-            0%{
-                -webkit-transform: translate(-100px,0px);
+            0% {
+                -webkit-transform: translate(-100px, 0px);
             }
-            100%{
-                -webkit-transform: translate(0px,0px);
+            100% {
+                -webkit-transform: translate(0px, 0px);
             }
         }
 
-
-
-        .hide{
+        .hide {
             display: none;
         }
 
@@ -203,8 +209,8 @@
             var shareBox = $(".share-box");
             var shareOne = $(".base-share").eq(0);
             var shareTwo = $(".base-share").eq(1);
-            var baseTxt= $(".base-txt").eq(0);
-            var baseTxt= $(".base-txt").eq(1);
+            var baseTxt = $(".base-txt").eq(0);
+            var baseTxt = $(".base-txt").eq(1);
 
             console.log(y)
             if (y >= 50) {
@@ -235,6 +241,9 @@
 
     <div class="share-box">
         <span class="base-share"><i></i><em class="base-txt">分享</em></span>
+        <span class="base-share"><i></i><em class="base-txt">收藏</em></span>
+        <span class="base-share"><i></i><em class="base-txt">收藏</em></span>
+        <span class="base-share"><i></i><em class="base-txt">收藏</em></span>
         <span class="base-share"><i></i><em class="base-txt">收藏</em></span>
     </div>
     <article class="article">
