@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <style type="text/css">
+        html,body{
+            margin: 0;
+            padding:0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .box{
+            display: flex;
+            -webkit-justify-content: center;
+            -webkit-align-items: center;
+            flex-flow: row wrap;
+        }
+        .box>div:nth-of-type(even){
+            background-color: darkgreen;
+        }
+        .box>div:nth-of-type(odd){
+            background-color: darkorchid;
+        }
+        .box>div{
+            flex: 1;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <div>item1</div>
+    <div>item2</div>
+    <div>item3</div>
+    <div>item4</div>
+    <div>item5</div>
+</div>
+
+</body>
+</html>

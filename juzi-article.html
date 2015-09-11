@@ -20,7 +20,10 @@
             width: 90%;
             padding: 0 5%;
             background-color: #f5f5f5;
+        }
+        .top-head{
             position: relative;
+            margin-bottom: 80px;
         }
 
         .top-pic {
@@ -41,24 +44,54 @@
         }
 
         .share-box {
-            width: 100%;
-            background-color: rgba(10, 10, 10, .3);
-            display: flex;
-            display: -webkit-flex;
+            position: absolute;
+            top: 40px;
+            width: 90%;
+           /* background-color: rgba(10, 10, 10, .1);*/
             display: -webkit-box;
-            display: -moz-box;
-            -webkit-justify-content: center;
-            -webkit-align-items: center;
-        }
+            display: -webkit-flex;
+            display: flex;
 
-        .share-box .share-box {
+            -webkit-justify-content:center;
+            justify-content: center;
+
+            -webkit-align-items: center;
+            align-items: center;
+
+            -webkit-box-align:center;
+            -moz-box-align: center;
+            -ms-flex-align: center;
+
+            -webkit-transition: all .5s ease-out;
+            -moz-transition: all .5s ease-out;
+            -ms-transition: all .5s ease-out;
+            -o-transition: all .5s ease-out;
+            transition: all .5s ease-out;
+        }
+        .fix{
+            position: fixed;
+            top: 40px;
+        }
+        .hide{
+            display: none;
         }
 
         .share-box .share-to {
+            font-size: 12px;
+            color: #989898;
+            white-space: nowrap;
         }
 
         .share-box .base-share {
-            flex:1;
+            flex: 1;
+            text-align: center;
+        }
+
+        .share-box .base-share:nth-of-type(even){
+            /*background-color: rgba(10,10,10,.3);*/
+        }
+        .share-box .base-share:nth-of-type(odd){
+           /* background-color: rgba(10,10,10,.5);*/
         }
 
         .share-box .base-share i {
@@ -66,8 +99,8 @@
             display: inline-block;
             background: url("http://images11.app.happyjuzi.com/content/201509/11/55f23eefc698e.png") no-repeat;
             background-size: cover;
-            width: 50px;
-            height: 50px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
         }
 
@@ -76,22 +109,20 @@
         }
 
         .base-share i.wxhy-icon {
-            background-position: 0 -48px;
+            background-position: 0 -28px;
         }
 
         .base-share i.xlwb-icon {
-            background-position: 0 -97px;
+            background-position: 0 -58px;
         }
 
         .base-share i.qqzon-icon {
-            background-position: 0 -148px;
+            background-position: 0 -88px;
         }
 
         .base-share i.qq-icon {
-            background-position: 0 -197px;
+            background-position: 0 -118px;
         }
-
-
 
         .article {
         }
@@ -115,20 +146,52 @@
     </style>
 </head>
 <body>
+<script type="text/javascript">
+    (function($){
+
+       $(window).on("scroll",function(ev){
+           var y = window.scrollY;
+           console.log(y)
+           if(y >= 52){
+               $(".share-to").css({"display":"none"})
+              $(".share-box").css({
+                   width:"60%"
+               }).addClass("fix")
+
+
+           }else if(y <= 52){
+               $(".share-to").css({
+                   "visibility":"visible",
+                   "display":"block"
+               })
+               $(".share-box").removeClass("fix").css({
+                   width:"90%"
+               })
+           }
+
+
+       })
+
+    })(Zepto);
+
+
+</script>
 
 <main class="main">
     <a href="" class="top-pic"><img src="http://a.happyjuzi.com/statics/a/img/juzi_downlaod.v2.3.png" alt=""/></a>
 
-    <h1 class="title">这是一个标题</h1>
-
-    <div class="share-box">
-        <div class="base-share share-to">分享至：</div>
-        <div class="base-share"><i class="pyq-icon"></i></div>
-        <div class="base-share"><i class="wxhy-icon"></i></div>
-        <div class="base-share"><i class="xlwb-icon"></i></div>
-        <div class="base-share"><i class="qqzon-icon"></i></div>
-        <div class="base-share"><i class="qq-icon"></i></div>
+    <div class="top-head">
+        <h1 class="title">这是一个标题</h1>
+        <div class="share-box">
+            <div class="base-share share-to">分享到：</div>
+            <div class="base-share"><i class="pyq-icon"></i></div>
+            <div class="base-share"><i class="wxhy-icon"></i></div>
+            <div class="base-share"><i class="xlwb-icon"></i></div>
+            <div class="base-share"><i class="qqzon-icon"></i></div>
+            <div class="base-share"><i class="qq-icon"></i></div>
+        </div>
     </div>
+
     <article class="article">
         <p class="base-txt">
             这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段是一个自然段这是一个自然段
@@ -137,12 +200,14 @@
         </p>
         <a href="" class="art-pic"><img src="http://images11.app.happyjuzi.com/news/201509/11/55f222b5bd422.jpg!jac1"
                                         alt=""/></a>
+
         <p class="base-txt">
             这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是
             一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段
         </p>
         <a href="" class="art-pic"><img src="http://images11.app.happyjuzi.com/content/201509/11/55f221b77dc06.jpg!jac1"
                                         alt=""/></a>
+
         <p class="base-txt">这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段</p>
         <a href="" class="art-pic"><img src="http://images11.app.happyjuzi.com/content/201509/11/55f221c21fe76.jpg!jac1"
                                         alt=""/></a>
