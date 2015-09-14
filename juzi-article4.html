@@ -17,11 +17,11 @@
         /*存储图片地址*/
         var ua = navigator.userAgent;
         var blank_img = 0;
-       /* if (ua.indexOf('Android') > 0) {
-            document.write('<s' + 'cript src="http://a.happyjuzi.com/statics/a/v2.5/android.js"></s' + 'cript>');
-        } else if (ua.indexOf('iPhone') > 0) {
-            document.write('<s' + 'cript src="http://a.happyjuzi.com/statics/a/v2.5/ios.js"></s' + 'cript>');
-        }*/
+        /* if (ua.indexOf('Android') > 0) {
+         document.write('<s' + 'cript src="http://a.happyjuzi.com/statics/a/v2.5/android.js"></s' + 'cript>');
+         } else if (ua.indexOf('iPhone') > 0) {
+         document.write('<s' + 'cript src="http://a.happyjuzi.com/statics/a/v2.5/ios.js"></s' + 'cript>');
+         }*/
 
     </script>
     <style type="text/css">
@@ -34,10 +34,9 @@
             font-family: "思源黑体 CN", Helvetica, Arial, "Microsoft YaHei", sans-serif;
         }
 
-
-        .artAuthor{
+        .artAuthor {
             height: 80px;
-            background-color: rgba(10,10,10,.2);
+            background-color: rgba(10, 10, 10, .2);
         }
 
         .main {
@@ -70,7 +69,7 @@
 
         .share-box {
             position: absolute;
-            left:0;
+            left: 0;
             top: 40px;
             width: 100%;
             /* background-color: rgba(10, 10, 10, .1);*/
@@ -88,11 +87,11 @@
             -moz-box-align: center;
             -ms-flex-align: center;
 
-            -webkit-transition: all .3s ease-out;
-            -moz-transition: all .3s ease-out;
-            -ms-transition: all .3s ease-out;
-            -o-transition: all .3s ease-out;
-            transition: all .3s ease-out;
+            -webkit-transition: all .5s ease-out;
+            -moz-transition: all .5s ease-out;
+            -ms-transition: all .5s ease-out;
+            -o-transition: all .5s ease-out;
+            transition: all .5s ease-out;
             -webkit-transform: translate(0, 0);
         }
 
@@ -102,7 +101,9 @@
 
         .fix {
             position: fixed;
-            left:0;
+            left: 16px;
+            right: 16px;
+            margin: 0 auto;
             width: 100%;
             top: 40px;
         }
@@ -187,46 +188,41 @@
         }
 
 
-
-
-
-
-
     </style>
     <script type="text/javascript">
-        (function($){
+        (function ($) {
 
-            $(window).on("scroll", function(ev){
+            $(window).on("scroll", function (ev) {
                 var topVal = 135;
                 var shareBox = $(".share-box");
-                var shareTitle= $(".share-title");
+                var shareTitle = $(".share-title");
                 var y = window.scrollY;
                 console.log(y)
-                if(y >= topVal){
+                if (y >= topVal) {
 
 
-                    (function(){
-                        shareBox.removeClass("move-right").addClass("move-left");
-                        setTimeout(function(){
+                    (function () {
+                        shareBox.removeClass("move-right").addClass("move-left fix");
+                        setTimeout(function () {
                             shareTitle.css({"visibility": "hidden"});
                             shareBox.css({
-                                width:"70%"
+                                width: "70%"
                             })
-                        },200)
+                        }, 300)
 
 
                     })()
 
-                }else if(y <= topVal){
-                    (function(){
+                } else if (y <= topVal) {
+                    (function () {
                         shareTitle.css({"visibility": "visible"});
-                        shareBox.removeClass("move-left").addClass("move-right");
-                        setTimeout(function(){
+                        shareBox.removeClass("move-left fix").addClass("move-right");
+                        setTimeout(function () {
                             shareTitle.css({"visibility": "visible"});
                             shareBox.css({
-                                width:"100%"
+                                width: "100%"
                             })
-                        },200)
+                        }, 300)
 
                     })()
 
@@ -235,7 +231,6 @@
 
 
             })
-
 
 
         })(Zepto)
@@ -252,13 +247,16 @@
     <div class="head-dom">
         <div class="title">H5页面</div>
         <div class="artAuthor">
-            <a id="author" data-event-id="10" name="admin"><img class="vote-img" data-type="not" src="http://images11.app.happyjuzi.com/portrait/55e570fdbd694.png!up1.webp"></a>
+            <a id="author" data-event-id="10" name="admin"><img class="vote-img" data-type="not"
+                                                                src="http://images11.app.happyjuzi.com/portrait/55e570fdbd694.png!up1.webp"></a>
+
             <div class="authorName">admin<br><span class="publish-time">2015-09-09 18:23</span>
                 <a class="news-tag head-tag" id="clickCat" data-event-id="49" name="你谁啊你">你谁啊你</a>
             </div>
 
             <div class="share-box">
                 <span class="share-title">分享到：</span>
+
                 <div class="base-share"><i class="pyq-icon"></i></div>
                 <div class="base-share"><i class="wxhy-icon"></i></div>
                 <div class="base-share"><i class="xlwb-icon"></i></div>
@@ -309,38 +307,38 @@
     </div>
     <div class='clear'></div>
     <script src='http://a.happyjuzi.com/statics/a/zepto.min.js'></script>
-<!--    <script src='http://a.happyjuzi.com/statics/a/v2.5/juzi_news.min.js?v=2.5'></script>-->
+    <!--    <script src='http://a.happyjuzi.com/statics/a/v2.5/juzi_news.min.js?v=2.5'></script>-->
     <!--<script src='http://192.168.10.52/static/api-static/v2.5/juzi_news.js'></script>-->
     <script src='http://a.happyjuzi.com/statics/a/v2.5/zepto.picLazyLoad.min.js'></script>
     <script>
-   /*     /!*推荐文章展现*!/
-        var reco = document.getElementById('recommend-dom');
-        var timeobj = new Date();
-        var nowtime = Math.round(timeobj.getTime() / 1000);
-        $(window).on('scroll',
-                function () {
-                    var s_top = getScrollTop() + window.screen.height;
-                    if (s_top > reco.offsetTop && reco.className != 'point') {
-                        reco.className = 'point';
-                        var more = 'func?mod=rc&doc=8750&rcid=8262,6841&tm=' + nowtime;
-                        statPoint('', '', '', '', '', '', '', '', '', more);
-                    }
-                }
-        );
-        /!*推荐文章点击*!/
-        $(function () {
-            $('.re-list').on('click', function () {
-                var id = $(this).attr('data-event-id');
-                var more = 'click?mod=rcc&id=8750&rcid=' + id + '&tm=' + nowtime;
-                statPoint('', '', '', '', '', '', '', '', '', more);
-            })
-            //投票
-            getVoteDom(29);
-            getVoteDom(30);
-            getVoteDom(62);
-            getVoteDom(63);
-            getVoteDom(64);
-        })*/
+        /*     /!*推荐文章展现*!/
+         var reco = document.getElementById('recommend-dom');
+         var timeobj = new Date();
+         var nowtime = Math.round(timeobj.getTime() / 1000);
+         $(window).on('scroll',
+         function () {
+         var s_top = getScrollTop() + window.screen.height;
+         if (s_top > reco.offsetTop && reco.className != 'point') {
+         reco.className = 'point';
+         var more = 'func?mod=rc&doc=8750&rcid=8262,6841&tm=' + nowtime;
+         statPoint('', '', '', '', '', '', '', '', '', more);
+         }
+         }
+         );
+         /!*推荐文章点击*!/
+         $(function () {
+         $('.re-list').on('click', function () {
+         var id = $(this).attr('data-event-id');
+         var more = 'click?mod=rcc&id=8750&rcid=' + id + '&tm=' + nowtime;
+         statPoint('', '', '', '', '', '', '', '', '', more);
+         })
+         //投票
+         getVoteDom(29);
+         getVoteDom(30);
+         getVoteDom(62);
+         getVoteDom(63);
+         getVoteDom(64);
+         })*/
     </script>
 
 </div>
