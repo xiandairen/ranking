@@ -183,14 +183,17 @@
                 function moveFix(){
 
                     (function () {
-                        $(".share-box").addClass("fix move-left").removeClass("move-right");
-                        setTimeout(function () {
-                            $(".share-box").find("span").css({"display": "none"});
-                            $(".share-box").css({
-                                "-webkit-transform": "translate(0, 0)",
-                                width: "60%"
-                            });
-                        }, 500)
+                        if(!$(".share-box").hasClass("move-right")){
+                            $(".share-box").removeClass("move-right").addClass("fix move-left");
+                            setTimeout(function () {
+                                $(".share-box").find("span").css({"display": "none"});
+                                $(".share-box").addClass("move-right");
+                                $(".share-box").css({
+                                    width: "60%"
+                                });
+                            }, 500);
+                        }
+
                     })();
                 }
                 moveFix();
@@ -198,14 +201,16 @@
             } else if (y <= 52) {
                 function moveTop(){
                     (function(){
-                        $(".share-box").addClass("move-right").removeClass("fix move-left");
+                        $(".share-box").removeClass("fix move-left").addClass("move-right");
                         setTimeout(function(){
                             $(".share-box").find("span").css({display:"block"});
+                            $(".share-box").removeClass("move-right");
                             $(".share-box").css({
                                 width:"90%"
                             });
                         },500)
                     })();
+
                 }
 
                moveTop();
