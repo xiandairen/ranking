@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script src="./js/zepto.min.js"></script>
+    <title></title>
+    <style type="text/css">
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-size: 14px;
+            font-family: "思源黑体 CN", Helvetica, Arial, "Microsoft YaHei", sans-serif;
+        }
+
+        .main {
+            width: 90%;
+            padding: 0 5%;
+            background-color: #f5f5f5;
+        }
+
+        .top-head {
+            position: relative;
+            margin-bottom: 80px;
+        }
+
+        .top-pic {
+            width: 100%;
+            height: 50px;
+            background-color: #ffd533;
+            text-align: center;
+        }
+
+        .top-pic img {
+            width: 100%;
+            height: auto;
+        }
+
+        .title {
+            margin: 0 0 60px 0;
+            font-size: 18px;
+        }
+
+        .share-box {
+            position: absolute;
+            top: 40px;
+            width: 100%;
+            /*   background-color: rgba(10, 10, 10, .1);*/
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+
+            -webkit-justify-content: center;
+            justify-content: center;
+
+            -webkit-align-items: center;
+            align-items: center;
+
+            -webkit-box-align: center;
+            -moz-box-align: center;
+            -ms-flex-align: center;
+
+            -webkit-transition: all .3s ease-out;
+            -moz-transition: all .3s ease-out;
+            -ms-transition: all .3s ease-out;
+            -o-transition: all .3s ease-out;
+            transition: all .3s ease-out;
+            -webkit-transform: translate(0, 0);
+        }
+
+        .share-title {
+            visibility: visible;
+        }
+
+        .fix {
+            position: fixed;
+            left: 0;
+            top: 40px;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .share-box .share-to {
+            font-size: 12px;
+            color: #989898;
+            white-space: nowrap;
+        }
+
+        .share-box .base-share {
+            flex: 1;
+            text-align: center;
+        }
+
+        .share-box .base-share:nth-of-type(even) {
+            /*background-color: rgba(10,10,10,.3);*/
+        }
+
+        .share-box .base-share:nth-of-type(odd) {
+            /* background-color: rgba(10,10,10,.5);*/
+        }
+
+        .share-box .base-share i {
+            font-style: normal;
+            display: inline-block;
+            background: url("http://images11.app.happyjuzi.com/content/201509/11/55f23eefc698e.png") no-repeat;
+            background-size: cover;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        .base-share i.pyq-icon {
+            background-position: 0 1px;
+        }
+
+        .base-share i.wxhy-icon {
+            background-position: 0 -28px;
+        }
+
+        .base-share i.xlwb-icon {
+            background-position: 0 -58px;
+        }
+
+        .base-share i.qqzon-icon {
+            background-position: 0 -88px;
+        }
+
+        .base-share i.qq-icon {
+            background-position: 0 -118px;
+        }
+
+        .article {
+        }
+
+        .base-txt {
+            line-height: 25px;
+            text-indent: 2em;
+        }
+
+        .art-pic {
+            width: 100%;
+            height: 300px;
+        }
+
+        .art-pic img {
+            width: 100%;
+            height: auto;
+        }
+
+        .move-left {
+            -webkit-transform: translate(-25%, 0);
+        }
+
+        .move-right {
+            -webkit-transform: translate(0, 0);
+        }
+
+        .runLeft-share {
+            -webkit-animation: runLeft .3s ease-out;
+            -webkit-animation-fill-mode: forwards;
+        }
+
+        .runCenter-share {
+            -webkit-animation: runCenter .3s ease-out;
+            -webkit-animation-fill-mode: forwards;
+        }
+
+        @-webkit-keyframes runLeft {
+
+            0% {
+                -webkit-transform: translate(0, 0);
+                /*width: 100%;*/
+            }
+            50% {
+                -webkit-transform: translate(-10%, 0);
+                width: 70%;
+            }
+            100% {
+                -webkit-transform: translate(-19%, 0);
+                width: 60%;
+            }
+
+        }
+
+        @-webkit-keyframes runCenter {
+            0% {
+                -webkit-transform: translate(-19%, 0);
+                width: 60%;
+            }
+            30%{
+                -webkit-transform: translate(-10%, 0);
+                width: 75%;
+            }
+            60% {
+                -webkit-transform: translate(-10%, 0);
+                width: 90%;
+            }
+            100% {
+                -webkit-transform: translate(0%, 0);
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+    //取matrix值
+    function getMatrix(dom) {
+        var val = dom.css("transform").replace(/\s/g, "").match(/\w{0,}/g);
+        var val = val.slice(1, val.length);
+        var arr = [];
+        for (var i = 0; i < val.length; i++) {
+            if (val[i] != "") {
+                arr.push(Number(val[i]))
+            }
+        }
+        return arr;
+    }
+
+    (function ($) {
+        $(window).on("scroll", function (ev) {
+            var y = window.scrollY;
+            console.log(y);
+            var txt = $(".share-title");
+            var shareBox = $(".share-box");
+            var pixW = $(".main").width() - Number($(".main").css("padding-left").replace("px", '')) * 2;
+
+
+            if (y >= 52) {
+                function animateShare() {
+                    (function () {
+                        shareBox.css({width: pixW}).addClass("fix");
+                        shareBox.removeClass("runCenter-share").addClass("runLeft-share");
+
+                    })()
+                }
+
+                animateShare()
+
+            } else if (y <= 52) {
+                function animateShow() {
+                    (function () {
+                        shareBox.removeClass("fix");
+                        shareBox.removeClass("runLeft-share").addClass("runCenter-share");
+                    })()
+                }
+
+                animateShow()
+            }
+
+
+        })
+
+    })(Zepto);
+
+
+</script>
+
+<main class="main">
+    <a href="" class="top-pic"><img src="http://a.happyjuzi.com/statics/a/img/juzi_downlaod.v2.3.png" alt=""/></a>
+
+    <div class="top-head">
+        <h1 class="title">这是一个标题</h1>
+        <!-- <div class="base-share share-to">分享到：</div>-->
+        <div class="share-box">
+            <span class="share-title">分享到:</span>
+
+            <div class="base-share"><i class="pyq-icon"></i></div>
+            <div class="base-share"><i class="wxhy-icon"></i></div>
+            <div class="base-share"><i class="xlwb-icon"></i></div>
+            <div class="base-share"><i class="qqzon-icon"></i></div>
+            <div class="base-share"><i class="qq-icon"></i></div>
+        </div>
+    </div>
+
+    <article class="article">
+        <p class="base-txt">
+            这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段是一个自然段这是一个自然段
+            然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段是一个自然段这是个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自
+            自然段这是一个自然段这是一个自然段是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段
+        </p>
+        <a href="" class="art-pic"><img src="http://images11.app.happyjuzi.com/news/201509/11/55f222b5bd422.jpg!jac1"
+                                        alt=""/></a>
+
+        <p class="base-txt">
+            这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是
+            一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段
+        </p>
+        <a href="" class="art-pic"><img src="http://images11.app.happyjuzi.com/content/201509/11/55f221b77dc06.jpg!jac1"
+                                        alt=""/></a>
+
+        <p class="base-txt">这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段这是一个自然段</p>
+        <a href="" class="art-pic"><img src="http://images11.app.happyjuzi.com/content/201509/11/55f221c21fe76.jpg!jac1"
+                                        alt=""/></a>
+    </article>
+</main>
+
+</body>
+</html>
