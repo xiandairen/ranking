@@ -72,13 +72,17 @@
         }
 
         .share-title {
-            visibility: visible;
+            -webkit-transition: all .3s ease-out;
+            -moz-transition: all .3s ease-out;
+            -ms-transition: all .3s ease-out;
+            -o-transition: all .3s ease-out;
+            transition: all .3s ease-out;
         }
 
         .fix {
             position: fixed;
             left: 0;
-            top: 40px;
+            top: 8px;
         }
 
         .share-box .share-to {
@@ -157,6 +161,28 @@
             -moz-animation: runCenter .3s ease-out;
             -o-animation: runCenter .3s ease-out;
             animation: runCenter .3s ease-out;
+
+            -webkit-animation-fill-mode: forwards;
+            -moz-animation-fill-mode: forwards;
+            -o-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+        }
+
+        .txt-show{
+            -webkit-animation: txtShow .3s ease-out;
+            -o-animation: txtShow .3s ease-out;
+            animation: txtShow .3s ease-out;
+
+            -webkit-animation-fill-mode: forwards;
+            -moz-animation-fill-mode: forwards;
+            -o-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+        }
+
+        .txt-hide{
+            -webkit-animation: txtHide .3s ease-out;
+            -o-animation: txtHide .3s ease-out;
+            animation: txtHide .3s ease-out;
 
             -webkit-animation-fill-mode: forwards;
             -moz-animation-fill-mode: forwards;
@@ -273,11 +299,11 @@
                 width: 60%;
             }
             100% {
-                -webkit-transform: translate(-19%, 0);
-                -moz-transform: translate(-19%, 0);
-                -ms-transform: translate(-19%, 0);
-                -o-transform: translate(-19%, 0);
-                transform: translate(-19%, 0);
+                -webkit-transform: translate(-20%, 0);
+                -moz-transform: translate(-20%, 0);
+                -ms-transform: translate(-20%, 0);
+                -o-transform: translate(-20%, 0);
+                transform: translate(-20%, 0);
                 width: 60%;
             }
 
@@ -285,11 +311,11 @@
 
         @-webkit-keyframes runCenter {
             0% {
-                -webkit-transform: translate(-19%, 0);
-                -moz-transform: translate(-19%, 0);
-                -ms-transform: translate(-19%, 0);
-                -o-transform: translate(-19%, 0);
-                transform: translate(-19%, 0);
+                -webkit-transform: translate(-20%, 0);
+                -moz-transform: translate(-20%, 0);
+                -ms-transform: translate(-20%, 0);
+                -o-transform: translate(-20%, 0);
+                transform: translate(-20%, 0);
                 width: 60%;
             }
             10% {
@@ -374,6 +400,24 @@
             }
         }
 
+        @-webkit-keyframes txtShow {
+            0%{
+               color: rgba(0,0,0,1);
+            }
+            100%{
+                color: rgba(0,0,0,1);
+            }
+        }
+
+        @-webkit-keyframes txtHide {
+            0%{
+                color: rgba(0,0,0,1);
+            }
+            100%{
+                color: rgba(0,0,0,0);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -390,35 +434,35 @@
                     var shareBox = $(".share-box");
                     var pixW = $(".main").width() - Number($(".main").css("padding-left").replace("px", '')) * 2;
 
-                    if (y >= 52) {
+                    if (y >= 155) {
                         this.on = true;
                         function animateShare() {
                             (function () {
                                 shareBox.css({width: pixW}).addClass("fix");
                                 shareBox.removeClass("runCenter-share").addClass("runLeft-share");
-
+                                txt.removeClass("txt-show").addClass("txt-hide");
                             })()
                         }
 
                         animateShare()
 
 
-                    } else if (y <= 52) {
+                    } else if (y <= 155) {
                         if (this.on) {
                             function animateShow() {
                                 (function () {
                                     shareBox.removeClass("fix");
                                     shareBox.removeClass("runLeft-share").addClass("runCenter-share");
+                                    txt.removeClass("txt-hide").addClass("txt-show");
                                 })()
                             }
-
                             animateShow()
                         }
                     }
                 })
             }
         }
-        share.move();
+       share.move();
     })(Zepto);
 
 
