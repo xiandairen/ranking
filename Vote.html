@@ -1,0 +1,71 @@
+
+<!DOCTYPE html><html><head lang='en'><meta charset='UTF-8'>
+    <meta name='apple-mobile-web-app-capable' content='yes'/>
+    <meta name='apple-touch-fullscreen' content='yes'/>
+    <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'/>
+    <meta name='format-detection' content='telephone=no'/>
+    <meta name='apple-mobile-web-app-status-bar-style' content='black'/>
+    <meta name='viewport' content='width=device-width,maximum-scale=1.0 initial-scale=1.0, user-scalable=0'/>
+    <!--<link rel='stylesheet' type='text/css' href='http://a.happyjuzi.com/statics/a/v2.6/juzi_news.min.css'>-->
+    <link rel='stylesheet' type='text/css' href='http://192.168.10.52/static/api-static/v2.6/juzi_news.css'>
+    <script >
+        var imgList = new Array(); /*存储图片地址*/
+        var ua = navigator.userAgent;
+        var blank_img=0;
+        if ( ua.indexOf('Android') > 0 ) {
+            //document.write('<s'+'cript src="http://a.happyjuzi.com/statics/a/v2.5/android.js"></s'+'cript>');
+            document.write('<s'+'cript src="http://192.168.10.52/static/api-static/v2.6/android.js"></s'+'cript>');
+        }else if(ua.indexOf('iPhone') > 0) {
+            //document.write('<s'+'cript src="http://a.happyjuzi.com/statics/a/v2.5/ios.js"></s'+'cript>');
+            document.write('<s'+'cript src="http://192.168.10.52/static/api-static/v2.6/ios.js"></s'+'cript>');
+        }
+
+    </script>
+
+    <title>~橘子娱乐~</title>
+
+
+</head><body data-id='5322'><div class='arcArea'><div class="head-dom"><div class="title">超级电磁炮</div><div class="artAuthor">
+    <a id="author" data-event-id="10" name="admin"><img   class="vote-img" data-type="not" src="http://images11.app.happyjuzi.com/portrait/5567f83f17cac.png!up1"></a>
+    <div class="authorName">admin<br><span  class="publish-time">2015-09-15 18:35</span>
+        <a class="news-tag head-tag" id="clickCat" data-event-id="59" name="电影">电影</a></div></div><div class="wrap-share">
+    <div class="share-box runCenter-share">
+        <span class="share-title txt-show">分享到:</span>
+        <div class="base-share"><i class="pyq-icon"></i></div>
+        <div class="base-share"><i class="wxhy-icon"></i></div>
+        <div class="base-share"><i class="xlwb-icon"></i></div>
+        <div class="base-share"><i class="qqzon-icon"></i></div>
+        <div class="base-share"><i class="qq-icon"></i></div>
+    </div>
+</div><p><img class="dom-img load-img" src="http://a.happyjuzi.com/statics/a/img/kong.png" data-original="/news/201509/16/55f8e9860972c.jpg"> </p></div><p>这里要进此行</p><p><span class="news-jump click-tag" data-id="5278">点击这里</span></p><p><br/></p><p>没有开始</p><p><div id='vote_63'></div></p><p><div id='vote_64'></div></p><p><div id='vote_62'></div></p><p><span class="news-jump click-tag" data-id="5325">点击这里第二个</span></p><div id="bottom-tag"></div><div class='clear' data-from='0' id='store-img'></div><div id='recommend-dom'><h1>更多好看</h1><div class='clear'></div> </div><div class='clear'></div><script src='http://a.happyjuzi.com/statics/a/zepto.min.js'></script>
+    <!--<script src='http://a.happyjuzi.com/statics/a/v2.6/juzi_news.min.js'></script>-->
+    <script src='http://192.168.10.52/static/api-static/v2.6/juzi_news.js'></script>
+    <script src='http://a.happyjuzi.com/statics/a/v2.5/zepto.picLazyLoad.min.js'></script>
+    <script>
+        /*推荐文章展现*/
+        var reco = document.getElementById('recommend-dom');
+        var timeobj = new Date();
+        var nowtime = Math.round(timeobj.getTime() / 1000);
+        $(window).on('scroll',
+                function() {
+                    var s_top = getScrollTop()+ window.screen.height;
+                    if(s_top>reco.offsetTop && reco.className!='point'){
+                        reco.className='point';
+                        var more = '#func?mod=rc&doc=5322&rcid=&tm='+nowtime;
+                        statPoint('','','','','','','','','',more);
+                    }
+                }
+        );
+        /*推荐文章点击*/
+        $(function(){
+            $('.re-list').on('click',function(){
+                var id = $(this).attr('data-event-id');
+                var more = '#click?mod=rcc&id=5322&rcid='+id+'&tm='+nowtime;
+                statPoint('','','','','','','','','',more);
+            })
+            //投票
+            getVoteDom(63);getVoteDom(64);getVoteDom(62);
+        })
+    </script>
+
+</div></body></html>

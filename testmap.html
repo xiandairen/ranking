@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象的key值按照从大到小的排序</title>
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<p></p>
+<script>
+
+    /*    var obj = {
+     key1: 1,
+     key2: 254,
+     key3: 875,
+     key4: 987,
+     key5: 123
+     }
+
+     var arr = [];
+
+     for (var i in obj) {
+     arr.push(obj[i])
+     }
+
+     function SrotArry(arrs) {
+     var len2 = arrs.length;
+     var temp2 = null;
+     for (var e = 0; e < len2 - 1; e++) {
+     for (var f = 0; f < len2 - 1 - e; f++) {
+     if (arrs[f] < arrs[f + 1]) {
+     var temp2 = arrs[f + 1];
+     arrs[f + 1] = arrs[f];
+     arrs[f] = temp2;
+     }
+     }
+     }
+     return arrs;
+     }
+
+
+     var bigArr = SrotArry(arr);
+     var keyArr = [];
+     for (var L in obj) {
+     keyArr.push(L)
+     }
+
+     var newObj = {};
+
+
+     for (var h = 0; h <= bigArr.length; h++) {
+     for(var r =0;r<=keyArr.length;r++){
+     if(bigArr[h] == obj[keyArr[r]]){
+     newObj[""+keyArr[r]+""] = bigArr[h];
+     break;
+     }
+     }
+     }
+
+
+
+     console.log(newObj)*/
+
+
+</script>
+
+<script type="text/javascript">
+
+    var obj = {
+        key1: 1,
+        key2: 254,
+        key3: 875,
+        key4: 987,
+        key5: 123
+    }
+
+
+    function objSort(obj) {
+
+        var arr = [];
+
+        for (var i in obj) {
+            arr.push(obj[i])
+        }
+
+        function SrotArry(arrs) {
+            var len2 = arrs.length;
+            var temp2 = null;
+            for (var e = 0; e < len2 - 1; e++) {
+                for (var f = 0; f < len2 - 1 - e; f++) {
+                    if (arrs[f] < arrs[f + 1]) {
+                        var temp2 = arrs[f + 1];
+                        arrs[f + 1] = arrs[f];
+                        arrs[f] = temp2;
+                    }
+                }
+            }
+            return arrs;
+        }
+
+
+        var bigArr = SrotArry(arr);
+        var keyArr = [];
+        for (var L in obj) {
+            keyArr.push(L)
+        }
+
+        var newObj = {};
+
+
+        for (var h = 0; h <= bigArr.length; h++) {
+            for (var r = 0; r <= keyArr.length; r++) {
+                if (bigArr[h] == obj[keyArr[r]]) {
+                    newObj["" + keyArr[r] + ""] = bigArr[h];
+                    break;
+                }
+            }
+        }
+
+
+        return newObj;
+
+
+    }
+
+    console.log(objSort(obj))
+
+</script>
+</body>
+</html>
