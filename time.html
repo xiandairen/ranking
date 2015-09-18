@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var publishTime = "2015-09-11 16:33:27";
+   /* var arr = publishTime.split(" ");
+    console.log(arr ) ;//["2015-09-11", "16:33:27"]
+    var m = arr[0];
+    var t = arr[1]
+    console.log(m.split("-")[1]+":"+m.split("-")[2]) ;//09:11
+    console.log(t.split(":")[0] +":"+t.split(":")[1]) //16:33*/
+
+
+    function getMayDay(str){
+        var arr = str.split(" ");
+        var M = arr[0],D = arr[1];
+        return{
+            May:function(){
+                return M.split("-")[1]+":"+M.split("-")[2]
+            },
+            Day:function(){
+                return D.split(":")[0] + ":" + D.split(":")[1]
+            }
+
+        }
+
+    }
+
+    console.log(getMayDay(publishTime).May())
+    console.log(getMayDay(publishTime).Day())
+
+
+</script>
+</body>
+</html>
