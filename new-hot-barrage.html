@@ -113,7 +113,9 @@
         #bullet-act .act-list .act-info .info-top .author span time {
             margin-right: 5px;
         }
-
+        #bullet-act .act-list .act-info .info-top .author em{
+            font-style: normal;
+        }
         #bullet-act .act-list .act-info .info-top .praise {
             float: right;
             font-size: 14px;
@@ -337,7 +339,7 @@
                                 "<div class='info-top clearfix'>"+
                                     "<div class='author clearfix'>"+
                                         "<strong>"+info[i].user.name+"</strong>"+
-                                        "<span><time>"+ getMayDay(info[i].publish_time).May() +"</time><time>"+getMayDay(info[i].publish_time).Day()+"</time></span>"+
+                                        "<span>"+'<em></em>'+"<time>"+ getMayDay(info[i].publish_time).May() +"</time><time>"+getMayDay(info[i].publish_time).Day()+"</time></span>"+
                                     "</div>" +
                                     "<div class='praise clearfix'>"+info[i].digg+"赞</div>"+
                                     "<p class='cont-txt'>"+ info[i].content +"</p>" +
@@ -348,7 +350,8 @@
                     }
 
                     actList.html(liStr);
-                    
+                    actList.find(".author").eq(0).find("span em").text("弹幕小能手")
+
 
                 },
                 error: function () {
